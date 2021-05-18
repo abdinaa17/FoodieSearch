@@ -4,21 +4,18 @@ const foodResult = document.getElementById('food-content');
 const alertText = document.querySelector('.alert');
 
 
+
 function displayRecipe(e) {
      e.preventDefault();
      const inputTextValue = inputText.value;
-    if(!inputTextValue){
-            alertText.classList.add('show');
-            setTimeout(()=>{
-            alertText.classList.remove('show');
-        }, 3000)
-            return
-    } else {
-  const fetchData = async () => {
+    if(inputTextValue){
+
+const fetchData = async () => {
   const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${inputTextValue}`)
 
   const data = await response.json()
-  console.log(data)
+  
+
 
 
 
@@ -29,7 +26,7 @@ foodResult.innerHTML = data.meals.map((meal) => {
                 <img class="food-img" src="${strMealThumb}" alt="${strMeal}">
                     <div class="food-info">
                         <h4>${strMeal}</h4>
-                        <h4>Type: ${strCategory}</h4> 
+                        <h4>Type: <span class='food-type' >${strCategory}</span> </h4> 
                     </div>
                     <div class="food-url">
                         <a href="${strSource}"  target="_blank" rel="noopener noreferrer">See More...</a>
@@ -46,24 +43,29 @@ foodResult.innerHTML = data.meals.map((meal) => {
             }).join('')
 
 
-}
-
-fetchData()
         }
 
+fetchData()
+        }  else {
+  
+alertText.classList.add('show');
+            setTimeout(()=>{
+            alertText.classList.remove('show');
+        }, 3000)
+            return
 
 
 
 
 
     }
+}
+   
+
 
 
 
 formSubmit.addEventListener('submit', displayRecipe)
-
-
-
 
 
 
