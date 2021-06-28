@@ -7,6 +7,8 @@ const alertText = document.querySelector('.alert');
 
 function displayRecipe(e) {
      e.preventDefault();
+     
+     // Getting the value that is entered by the user.
      const inputTextValue = inputText.value;
     if(inputTextValue){
 
@@ -15,10 +17,6 @@ const fetchData = async () => {
 
   const data = await response.json()
   
-
-
-
-
 foodResult.innerHTML = data.meals.map((meal) => {
                const {strMealThumb, strMeal, strCategory, strSource, strInstructions} = meal
  return `<article class="food-container" id="food-container">
